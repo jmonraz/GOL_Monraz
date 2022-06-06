@@ -214,6 +214,7 @@ namespace GOL_Monraz
             this.fromTimeToolStripMenuItem.Name = "fromTimeToolStripMenuItem";
             this.fromTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fromTimeToolStripMenuItem.Text = "From Time";
+            this.fromTimeToolStripMenuItem.Click += new System.EventHandler(this.fromTimeToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 

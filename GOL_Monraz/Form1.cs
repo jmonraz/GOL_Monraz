@@ -293,6 +293,29 @@ namespace GOL_Monraz
                     }
                 }
             }
-        }       
+        }
+
+        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random randy = new Random();
+
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    int num = randy.Next(0, 2);
+                    if (num == 0)
+                    {
+                        universe[x, y] = true;
+                        graphicsPanel1.Invalidate();
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
+                        graphicsPanel1.Invalidate();
+                    }
+                }
+            }
+        }
     }
 }
