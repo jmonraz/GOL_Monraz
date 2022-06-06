@@ -209,5 +209,21 @@ namespace GOL_Monraz
         {
             this.Close();
         }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for(int y = 0; y < universe.GetLength(1); y++)
+            {
+                for(int x = 0; x < universe.GetLength(0); x++)
+                {
+                    universe[x, y] = false;
+                }
+            }
+
+            generations = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            this.timer.Enabled = false;
+            graphicsPanel1.Invalidate();
+        }
     }
 }
