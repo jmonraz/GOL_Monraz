@@ -26,6 +26,9 @@ namespace GOL_Monraz
         // Generation count
         int generations = 0;
 
+        // seed number
+
+        int seed = 100;
         public Form1()
         {
             InitializeComponent();
@@ -254,7 +257,46 @@ namespace GOL_Monraz
         {
             ColorDialog dlg = new ColorDialog();
 
-            dlg.ShowDialog();
+
+            dlg.Color = cellColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                cellColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+            
         }
+
+        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SeedDialog dlg = new SeedDialog();
+
+            dlg.seedNumber = seed;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                seed = dlg.seedNumber;
+  
+                Random randy = new Random(seed);
+
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    for(int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        int num = randy.Next(0, 2);
+                        if(num == 0)
+                        {
+                            universe[x, y] = true;
+                            graphicsPanel1.Invalidate();
+                        }
+                        else
+                        {
+                            universe[x, y] = false;
+                            graphicsPanel1.Invalidate();
+                        }
+                    }
+                }
+            }
+        }       
     }
 }
