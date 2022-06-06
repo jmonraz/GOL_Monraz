@@ -332,5 +332,17 @@ namespace GOL_Monraz
                 graphicsPanel1.Invalidate();
             }
         }
+
+        private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = graphicsPanel1.BackColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.BackColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
     }
 }

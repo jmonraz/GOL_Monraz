@@ -240,6 +240,7 @@ namespace GOL_Monraz
             this.backColorToolStripMenuItem.Name = "backColorToolStripMenuItem";
             this.backColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backColorToolStripMenuItem.Text = "Back Color";
+            this.backColorToolStripMenuItem.Click += new System.EventHandler(this.backColorToolStripMenuItem_Click);
             // 
             // gridColorToolStripMenuItem
             // 
