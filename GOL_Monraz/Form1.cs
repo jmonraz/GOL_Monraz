@@ -247,6 +247,9 @@ namespace GOL_Monraz
 
                 universe = new bool[x, y];
                 scratchPad = new bool[x, y];
+
+                toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
+                
                 graphicsPanel1.Invalidate();
             }           
         }
