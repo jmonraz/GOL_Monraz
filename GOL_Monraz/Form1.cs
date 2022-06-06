@@ -243,6 +243,7 @@ namespace GOL_Monraz
                 int x = dlg.CellWidht;
 
                 universe = new bool[x, y];
+                scratchPad = new bool[x, y];
                 graphicsPanel1.Invalidate();
 
             }
