@@ -119,6 +119,35 @@ namespace GOL_Monraz
             }
         }
 
+        private int CountNeighborsFinite(int x, int y)
+        {
+            // keeps count of neighbors
+            int count = 0;
+            // Gets the 2-d array length
+            int xLen = universe.GetLength(0);
+            int yLen = universe.GetLength(1);
+
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+            {
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
+                {
+                    int xCheck = x + xOffset;
+                    int yCheck = y + yOffset;
+
+                    if (xOffset == 0 && yOffset == 0) continue;
+                    if (xCheck < 0) continue;
+                    if (yCheck < 0) continue;
+                    if (xCheck >= xLen) continue;
+                    if (yCheck >= yLen) continue;
+
+                    if (universe[xCheck, yCheck] == true) count++;
+
+                }
+            }
+
+            return count;
+        }
+
         private void PauseStripButton_Click(object sender, EventArgs e)
         {
             this.timer.Enabled = false;
