@@ -118,5 +118,20 @@ namespace GOL_Monraz
                 graphicsPanel1.Invalidate();
             }
         }
+
+        private void PauseStripButton_Click(object sender, EventArgs e)
+        {
+            this.timer.Enabled = false;
+        }
+
+        private void PlayStripButton_Click(object sender, EventArgs e)
+        {
+            this.timer.Enabled = true;
+        }
+
+        private void ForwardStripButton_Click(object sender, EventArgs e)
+        {
+            NextGeneration();
+        }
     }
 }
