@@ -15,7 +15,9 @@ namespace GOL_Monraz
         // The universe array
         bool[,] universe = new bool[5, 5];
 
+        // The scratch pad array
         bool[,] scratchPad = new bool[5,5];
+
         // Drawing colors
         Color gridColor = Color.Black;
         Color cellColor = Color.Gray;
@@ -27,8 +29,8 @@ namespace GOL_Monraz
         int generations = 0;
 
         // seed number
-
         int seed = 100;
+
         public Form1()
         {
             InitializeComponent();
