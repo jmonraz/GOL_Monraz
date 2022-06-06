@@ -22,5 +22,12 @@ namespace GOL_Monraz
             get { return (int)numericUpDownSeed.Value; }
             set { numericUpDownSeed.Value = value; }
         }
+
+        private void randomLabel_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            
+            numericUpDownSeed.Value = rand.Next(int.MinValue, int.MaxValue);
+        }
     }
 }

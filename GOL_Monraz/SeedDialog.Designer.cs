@@ -40,10 +40,15 @@
             // 
             this.numericUpDownSeed.Location = new System.Drawing.Point(82, 78);
             this.numericUpDownSeed.Maximum = new decimal(new int[] {
-            10000,
-            0,
+            1316134912,
+            2328,
             0,
             0});
+            this.numericUpDownSeed.Minimum = new decimal(new int[] {
+            276447232,
+            23283,
+            0,
+            -2147483648});
             this.numericUpDownSeed.Name = "numericUpDownSeed";
             this.numericUpDownSeed.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownSeed.TabIndex = 0;
@@ -65,6 +70,7 @@
             this.randomLabel.TabIndex = 2;
             this.randomLabel.Text = "Randomize";
             this.randomLabel.UseVisualStyleBackColor = true;
+            this.randomLabel.Click += new System.EventHandler(this.randomLabel_Click);
             // 
             // okButton
             // 
