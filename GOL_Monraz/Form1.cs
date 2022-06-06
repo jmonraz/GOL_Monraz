@@ -15,6 +15,7 @@ namespace GOL_Monraz
         // The universe array
         bool[,] universe = new bool[5, 5];
 
+        bool[,] scratchPad = new bool[5,5];
         // Drawing colors
         Color gridColor = Color.Black;
         Color cellColor = Color.Gray;
@@ -32,19 +33,60 @@ namespace GOL_Monraz
             // Setup the timer
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
-            timer.Enabled = true; // start timer running
+            timer.Enabled = false; // start timer running
         }
 
         // Calculate the next generation of cells
         private void NextGeneration()
         {
 
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    int count = CountNeighborsFinite(x, y);
 
+                    // Apply the rules
+                    if (universe[x, y])
+                    {
+                        if (count < 2)
+                        {
+                            scratchPad[x, y] = false;
+                        }
+                        else if (count > 3)
+                        {
+                            scratchPad[x, y] = false;
+                        }
+                        else if (count == 2 || count == 3)
+                        {
+                            scratchPad[x, y] = true;
+                        }
+                    }
+                    // Turn on/off the scratchPad
+                    else
+                    {
+                        if (count == 3)
+                        {
+                            scratchPad[x, y] = true;
+                        }
+                        else
+                        {
+                            scratchPad[x, y] = false;
+                        }
+                    }
+                }
+            }
+
+            bool[,] temp = scratchPad;
+            scratchPad = universe;
+            universe = temp;
             // Increment generation count
             generations++;
 
             // Update status strip generations
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+
+            graphicsPanel1.Invalidate();
         }
 
         // The event called by the timer every Interval milliseconds.
