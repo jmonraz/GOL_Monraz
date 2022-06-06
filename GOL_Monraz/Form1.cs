@@ -225,5 +225,28 @@ namespace GOL_Monraz
             this.timer.Enabled = false;
             graphicsPanel1.Invalidate();
         }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Options_Dialog dlg = new Options_Dialog();
+
+
+
+            dlg.Miliseconds = timer.Interval;
+
+            dlg.CellWidht = universe.GetLength(1);
+            dlg.CellHeight = universe.GetLength(0);
+            
+            if(DialogResult.OK == dlg.ShowDialog())
+            {
+                int y = dlg.CellHeight;
+                int x = dlg.CellWidht;
+
+                universe = new bool[x, y];
+                graphicsPanel1.Invalidate();
+
+            }
+            
+        }
     }
 }

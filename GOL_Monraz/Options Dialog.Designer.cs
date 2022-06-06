@@ -112,8 +112,10 @@ namespace GOL_Monraz
             // 
             // Options_Dialog
             // 
+            this.AcceptButton = this.OkButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(348, 237);
             this.Controls.Add(this.heightCells);
             this.Controls.Add(this.widthCells);
