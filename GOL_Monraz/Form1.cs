@@ -249,5 +249,12 @@ namespace GOL_Monraz
             }
             
         }
+
+        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.ShowDialog();
+        }
     }
 }
