@@ -319,5 +319,18 @@ namespace GOL_Monraz
                 }
             }
         }
+
+        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+
+            dlg.Color = gridColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
     }
 }

@@ -64,10 +64,10 @@ namespace GOL_Monraz
             this.ForwardStripButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
-            this.graphicsPanel1 = new GOL_Monraz.GraphicsPanel();
             this.runToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graphicsPanel1 = new GOL_Monraz.GraphicsPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -206,20 +206,20 @@ namespace GOL_Monraz
             // fromSeedToolStripMenuItem
             // 
             this.fromSeedToolStripMenuItem.Name = "fromSeedToolStripMenuItem";
-            this.fromSeedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromSeedToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.fromSeedToolStripMenuItem.Text = "From Seed";
             this.fromSeedToolStripMenuItem.Click += new System.EventHandler(this.fromSeedToolStripMenuItem_Click);
             // 
             // fromCurrentSeedToolStripMenuItem
             // 
             this.fromCurrentSeedToolStripMenuItem.Name = "fromCurrentSeedToolStripMenuItem";
-            this.fromCurrentSeedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromCurrentSeedToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.fromCurrentSeedToolStripMenuItem.Text = "From Current Seed";
             // 
             // fromTimeToolStripMenuItem
             // 
             this.fromTimeToolStripMenuItem.Name = "fromTimeToolStripMenuItem";
-            this.fromTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fromTimeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.fromTimeToolStripMenuItem.Text = "From Time";
             this.fromTimeToolStripMenuItem.Click += new System.EventHandler(this.fromTimeToolStripMenuItem_Click);
             // 
@@ -238,31 +238,32 @@ namespace GOL_Monraz
             // backColorToolStripMenuItem
             // 
             this.backColorToolStripMenuItem.Name = "backColorToolStripMenuItem";
-            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backColorToolStripMenuItem.Text = "Back Color";
             // 
             // gridColorToolStripMenuItem
             // 
             this.gridColorToolStripMenuItem.Name = "gridColorToolStripMenuItem";
-            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gridColorToolStripMenuItem.Text = "Grid Color";
+            this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
             // 
             // cellColorToolStripMenuItem
             // 
             this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
-            this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cellColorToolStripMenuItem.Text = "Cell Color";
             this.cellColorToolStripMenuItem.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(128, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -361,6 +362,30 @@ namespace GOL_Monraz
             this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
             this.toolStripStatusLabelGenerations.Text = "Generations = 0";
             // 
+            // runToolStripMenuItem1
+            // 
+            this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
+            this.runToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.runToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.runToolStripMenuItem1.Text = "Run";
+            this.runToolStripMenuItem1.Click += new System.EventHandler(this.PlayStripButton_Click);
+            // 
+            // pauseToolStripMenuItem
+            // 
+            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
+            this.pauseToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.pauseToolStripMenuItem.Text = "Pause";
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.PauseStripButton_Click);
+            // 
+            // nextToolStripMenuItem
+            // 
+            this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
+            this.nextToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.nextToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.nextToolStripMenuItem.Text = "Next";
+            this.nextToolStripMenuItem.Click += new System.EventHandler(this.ForwardStripButton_Click);
+            // 
             // graphicsPanel1
             // 
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
@@ -371,30 +396,6 @@ namespace GOL_Monraz
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
-            // 
-            // runToolStripMenuItem1
-            // 
-            this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
-            this.runToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.runToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.runToolStripMenuItem1.Text = "Run";
-            this.runToolStripMenuItem1.Click += new System.EventHandler(this.PlayStripButton_Click);
-            // 
-            // pauseToolStripMenuItem
-            // 
-            this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pauseToolStripMenuItem.Text = "Pause";
-            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.PauseStripButton_Click);
-            // 
-            // nextToolStripMenuItem
-            // 
-            this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
-            this.nextToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.nextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nextToolStripMenuItem.Text = "Next";
-            this.nextToolStripMenuItem.Click += new System.EventHandler(this.ForwardStripButton_Click);
             // 
             // Form1
             // 
