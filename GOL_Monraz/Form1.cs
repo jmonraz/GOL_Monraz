@@ -233,24 +233,20 @@ namespace GOL_Monraz
         {
             Options_Dialog dlg = new Options_Dialog();
 
-
-
             dlg.Miliseconds = timer.Interval;
-
             dlg.CellWidht = universe.GetLength(1);
             dlg.CellHeight = universe.GetLength(0);
             
             if(DialogResult.OK == dlg.ShowDialog())
             {
+                timer.Interval = dlg.Miliseconds;
                 int y = dlg.CellHeight;
                 int x = dlg.CellWidht;
 
                 universe = new bool[x, y];
                 scratchPad = new bool[x, y];
                 graphicsPanel1.Invalidate();
-
-            }
-            
+            }           
         }
 
         private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)

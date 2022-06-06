@@ -45,6 +45,11 @@ namespace GOL_Monraz
             // numericUpDownMiliseconds
             // 
             this.numericUpDownMiliseconds.Location = new System.Drawing.Point(226, 29);
+            this.numericUpDownMiliseconds.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericUpDownMiliseconds.Name = "numericUpDownMiliseconds";
             this.numericUpDownMiliseconds.Size = new System.Drawing.Size(63, 20);
             this.numericUpDownMiliseconds.TabIndex = 0;
