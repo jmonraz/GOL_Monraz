@@ -276,9 +276,11 @@ namespace GOL_Monraz
                 timer.Interval = dlg.Miliseconds;
                 int y = dlg.CellHeight;
                 int x = dlg.CellWidht;
-
-                universe = new bool[x, y];
-                scratchPad = new bool[x, y];
+                if(!(y == universe.GetLength(1) && x == universe.GetLength(0)))
+                {
+                    universe = new bool[x, y];
+                    scratchPad = new bool[x, y];
+                }
 
                 toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
 
