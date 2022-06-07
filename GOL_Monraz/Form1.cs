@@ -36,6 +36,9 @@ namespace GOL_Monraz
 
         // Bool for enabling/disabling cell neighbor count
         bool isNeighborCountVisible = true;
+
+        // Bool for grid on/off
+        bool isGridVisible = true;
         public Form1()
         {
             InitializeComponent();
@@ -139,6 +142,7 @@ namespace GOL_Monraz
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
             int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
+            
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
@@ -166,8 +170,12 @@ namespace GOL_Monraz
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
 
-                    // Outline the cell with a pen
-                    e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    if (isGridVisible == true)
+                    {
+                        // Outline the cell with a pen
+                        e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    }
+                    
 
                     if(isNeighborCountVisible == true)
                     {
@@ -418,6 +426,19 @@ namespace GOL_Monraz
             else if (neighborCountToolStripMenuItem.Checked == false)
             {
                 isNeighborCountVisible = false;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(gridToolStripMenuItem.Checked == true)
+            {
+                isGridVisible = true;
+            }
+            else if(gridToolStripMenuItem.Checked == false)
+            {
+                isGridVisible = false;
             }
             graphicsPanel1.Invalidate();
         }
