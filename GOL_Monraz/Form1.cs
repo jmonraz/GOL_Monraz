@@ -34,6 +34,8 @@ namespace GOL_Monraz
         // alive cells count
         int cellsAlive = 0;
 
+        // Bool for enabling/disabling cell neighbor count
+        bool isNeighborCountVisible = true;
         public Form1()
         {
             InitializeComponent();
@@ -153,14 +155,10 @@ namespace GOL_Monraz
                     // A rectangle to represent each cell in pixels
                     Rectangle cellRect = Rectangle.Empty;
 
-                    
-
                     cellRect.X = x * cellWidth;
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
-
-                    
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -171,21 +169,29 @@ namespace GOL_Monraz
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 
-                    Font font = new Font("Arial", 6f);
-
-                    StringFormat stringFormat = new StringFormat();
-                    stringFormat.Alignment = StringAlignment.Center;
-                    stringFormat.LineAlignment = StringAlignment.Center;
-
-                    int neighbors = CountNeighborsFinite(x, y);
-
-                    if (neighbors != 0)
+                    if(isNeighborCountVisible == true)
                     {
-                        e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+                        // Sets font and size of neighbor count
+                        Font font = new Font("Arial", 6f);
+
+                        StringFormat stringFormat = new StringFormat();
+                        stringFormat.Alignment = StringAlignment.Center;
+                        stringFormat.LineAlignment = StringAlignment.Center;
+
+                        // Gets number of neighbors for each cell
+                        int neighbors = CountNeighborsFinite(x, y);
+
+                        // If the neighbor count is zero do not display it
+                        if (neighbors != 0)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+                        }
                     }
+                    
                 }
             }
 
+            
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -401,6 +407,19 @@ namespace GOL_Monraz
                 graphicsPanel1.BackColor = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
+        }
+
+        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (neighborCountToolStripMenuItem.Checked == true)
+            {
+                isNeighborCountVisible = true;
+            }
+            else if (neighborCountToolStripMenuItem.Checked == false)
+            {
+                isNeighborCountVisible = false;
+            }
+            graphicsPanel1.Invalidate();
         }
     }
 }
