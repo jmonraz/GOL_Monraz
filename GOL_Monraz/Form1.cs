@@ -13,10 +13,10 @@ namespace GOL_Monraz
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[5, 5];
+        bool[,] universe = new bool[25, 25];
 
         // The scratch pad array
-        bool[,] scratchPad = new bool[5, 5];
+        bool[,] scratchPad = new bool[25, 25];
 
         // Drawing colors
         Color gridColor = Color.Black;
@@ -108,12 +108,12 @@ namespace GOL_Monraz
             int yAxis = universe.GetLength(1);
             int xAxis = universe.GetLength(0);
             cellsAlive = yAxis * xAxis;
-            for(int y = 0; y < universe.GetLength(1); y++)
+            for (int y = 0; y < universe.GetLength(1); y++)
             {
-                for(int x = 0; x < universe.GetLength(0); x++)
+                for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    
-                    if(!universe[x,y])
+
+                    if (!universe[x, y])
                     {
                         --cellsAlive;
                     }
@@ -149,12 +149,18 @@ namespace GOL_Monraz
                 // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
+
                     // A rectangle to represent each cell in pixels
                     Rectangle cellRect = Rectangle.Empty;
+
+                    
+
                     cellRect.X = x * cellWidth;
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
+
+                    
 
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
@@ -164,6 +170,19 @@ namespace GOL_Monraz
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+
+                    Font font = new Font("Arial", 6f);
+
+                    StringFormat stringFormat = new StringFormat();
+                    stringFormat.Alignment = StringAlignment.Center;
+                    stringFormat.LineAlignment = StringAlignment.Center;
+
+                    int neighbors = CountNeighborsFinite(x, y);
+
+                    if (neighbors != 0)
+                    {
+                        e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+                    }
                 }
             }
 
@@ -276,7 +295,7 @@ namespace GOL_Monraz
                 timer.Interval = dlg.Miliseconds;
                 int y = dlg.CellHeight;
                 int x = dlg.CellWidht;
-                if(!(y == universe.GetLength(1) && x == universe.GetLength(0)))
+                if (!(y == universe.GetLength(1) && x == universe.GetLength(0)))
                 {
                     universe = new bool[x, y];
                     scratchPad = new bool[x, y];
