@@ -16,7 +16,7 @@ namespace GOL_Monraz
         bool[,] universe = new bool[5, 5];
 
         // The scratch pad array
-        bool[,] scratchPad = new bool[5,5];
+        bool[,] scratchPad = new bool[5, 5];
 
         // Drawing colors
         Color gridColor = Color.Black;
@@ -31,12 +31,16 @@ namespace GOL_Monraz
         // seed number
         int seed = 100;
 
+        // alive cells count
+        int cellsAlive = 0;
+
         public Form1()
         {
             InitializeComponent();
 
             // Setup the timer
             timer.Interval = 100; // milliseconds
+            toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
         }
@@ -82,6 +86,9 @@ namespace GOL_Monraz
                 }
             }
 
+            CountAliveCells();
+
+            aliveLabel.Text = "Alive = " + cellsAlive.ToString();
             bool[,] temp = scratchPad;
             scratchPad = universe;
             universe = temp;
@@ -89,9 +96,31 @@ namespace GOL_Monraz
             generations++;
 
             // Update status strip generations
+
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
 
             graphicsPanel1.Invalidate();
+        }
+
+        private void CountAliveCells()
+        {
+
+            int yAxis = universe.GetLength(1);
+            int xAxis = universe.GetLength(0);
+            cellsAlive = yAxis * xAxis;
+            for(int y = 0; y < universe.GetLength(1); y++)
+            {
+                for(int x = 0; x < universe.GetLength(0); x++)
+                {
+                    
+                    if(!universe[x,y])
+                    {
+                        --cellsAlive;
+                    }
+                }
+            }
+
+            aliveLabel.Text = "Alive = " + cellsAlive.ToString();
         }
 
         // The event called by the timer every Interval milliseconds.
@@ -160,7 +189,7 @@ namespace GOL_Monraz
 
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];
-
+                CountAliveCells();
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
             }
@@ -217,15 +246,18 @@ namespace GOL_Monraz
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for(int y = 0; y < universe.GetLength(1); y++)
+            for (int y = 0; y < universe.GetLength(1); y++)
             {
-                for(int x = 0; x < universe.GetLength(0); x++)
+                for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     universe[x, y] = false;
                 }
             }
 
             generations = 0;
+            cellsAlive = 0;
+
+            aliveLabel.Text = "Alive = " + cellsAlive.ToString();
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
             this.timer.Enabled = false;
             graphicsPanel1.Invalidate();
@@ -238,8 +270,8 @@ namespace GOL_Monraz
             dlg.Miliseconds = timer.Interval;
             dlg.CellWidht = universe.GetLength(1);
             dlg.CellHeight = universe.GetLength(0);
-            
-            if(DialogResult.OK == dlg.ShowDialog())
+
+            if (DialogResult.OK == dlg.ShowDialog())
             {
                 timer.Interval = dlg.Miliseconds;
                 int y = dlg.CellHeight;
@@ -249,9 +281,9 @@ namespace GOL_Monraz
                 scratchPad = new bool[x, y];
 
                 toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
-                
+
                 graphicsPanel1.Invalidate();
-            }           
+            }
         }
 
         private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -265,7 +297,7 @@ namespace GOL_Monraz
                 cellColor = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
-            
+
         }
 
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -277,15 +309,15 @@ namespace GOL_Monraz
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 seed = dlg.seedNumber;
-  
+
                 Random randy = new Random(seed);
 
                 for (int y = 0; y < universe.GetLength(1); y++)
                 {
-                    for(int x = 0; x < universe.GetLength(0); x++)
+                    for (int x = 0; x < universe.GetLength(0); x++)
                     {
                         int num = randy.Next(0, 2);
-                        if(num == 0)
+                        if (num == 0)
                         {
                             universe[x, y] = true;
                             graphicsPanel1.Invalidate();
@@ -298,6 +330,7 @@ namespace GOL_Monraz
                     }
                 }
             }
+            CountAliveCells();
         }
 
         private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,6 +354,7 @@ namespace GOL_Monraz
                     }
                 }
             }
+            CountAliveCells();
         }
 
         private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)

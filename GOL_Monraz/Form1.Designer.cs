@@ -67,8 +67,9 @@ namespace GOL_Monraz
             this.runToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphicsPanel1 = new GOL_Monraz.GraphicsPanel();
             this.toolStripStatusLabelInterval = new System.Windows.Forms.ToolStripStatusLabel();
+            this.graphicsPanel1 = new GOL_Monraz.GraphicsPanel();
+            this.aliveLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -352,7 +353,8 @@ namespace GOL_Monraz
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations,
-            this.toolStripStatusLabelInterval});
+            this.toolStripStatusLabelInterval,
+            this.aliveLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 323);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(573, 22);
@@ -389,6 +391,12 @@ namespace GOL_Monraz
             this.nextToolStripMenuItem.Text = "Next";
             this.nextToolStripMenuItem.Click += new System.EventHandler(this.ForwardStripButton_Click);
             // 
+            // toolStripStatusLabelInterval
+            // 
+            this.toolStripStatusLabelInterval.Name = "toolStripStatusLabelInterval";
+            this.toolStripStatusLabelInterval.Size = new System.Drawing.Size(66, 17);
+            this.toolStripStatusLabelInterval.Text = "Interval = 0";
+            // 
             // graphicsPanel1
             // 
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
@@ -400,11 +408,11 @@ namespace GOL_Monraz
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
             // 
-            // toolStripStatusLabelInterval
+            // aliveLabel
             // 
-            this.toolStripStatusLabelInterval.Name = "toolStripStatusLabelInterval";
-            this.toolStripStatusLabelInterval.Size = new System.Drawing.Size(66, 17);
-            this.toolStripStatusLabelInterval.Text = "Interval = 0";
+            this.aliveLabel.Name = "aliveLabel";
+            this.aliveLabel.Size = new System.Drawing.Size(53, 17);
+            this.aliveLabel.Text = "Alive = 0";
             // 
             // Form1
             // 
@@ -472,6 +480,7 @@ namespace GOL_Monraz
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nextToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelInterval;
+        private System.Windows.Forms.ToolStripStatusLabel aliveLabel;
     }
 }
 
