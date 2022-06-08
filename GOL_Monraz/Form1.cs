@@ -506,11 +506,27 @@ namespace GOL_Monraz
             if (neighborCountToolStripMenuItem.Checked == true)
             {
                 isNeighborCountVisible = true;
+                neighborCountToolStripMenuItem1.Checked = true;
             }
             //Turns off the neighbor count in the graphic panel for each cell
             else if (neighborCountToolStripMenuItem.Checked == false)
             {
                 isNeighborCountVisible = false;
+                neighborCountToolStripMenuItem1.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
+        }
+        private void neighborCountToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(neighborCountToolStripMenuItem1.Checked == true)
+            {
+                isNeighborCountVisible = true;
+                neighborCountToolStripMenuItem.Checked = true;
+            }
+            else if(neighborCountToolStripMenuItem1.Checked == false)
+            {
+                isNeighborCountVisible = false;
+                neighborCountToolStripMenuItem.Checked = false;
             }
             graphicsPanel1.Invalidate();
         }
