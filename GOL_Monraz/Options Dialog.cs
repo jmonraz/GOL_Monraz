@@ -15,7 +15,8 @@ namespace GOL_Monraz
         public Options_Dialog()
         {
             InitializeComponent();
-            
+            numericUpDownHeightCells.Value = Properties.Settings.Default.universeHeight;
+            numericUpDownWidthCells.Value = Properties.Settings.Default.universeWidth;
         }
 
         public int Miliseconds
@@ -34,6 +35,15 @@ namespace GOL_Monraz
         {
             get { return (int)numericUpDownHeightCells.Value; }
             set { numericUpDownHeightCells.Value = value; }
+        }
+
+        private void Options_Dialog_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.universeWidth = (int)numericUpDownWidthCells.Value;
+            Properties.Settings.Default.universeHeight = (int)numericUpDownHeightCells.Value;
+
+            Properties.Settings.Default.Save();
+
         }
     }
 

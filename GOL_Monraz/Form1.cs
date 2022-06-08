@@ -12,11 +12,12 @@ namespace GOL_Monraz
 {
     public partial class Form1 : Form
     {
+        
         // The universe array
-        bool[,] universe = new bool[25, 25];
+        bool[,] universe = new bool[,] { };
 
         // The scratch pad array
-        bool[,] scratchPad = new bool[25, 25];
+        bool[,] scratchPad = new bool[,] { };
 
         // Drawing colors
         Color gridColor = Color.Black;
@@ -49,8 +50,13 @@ namespace GOL_Monraz
         {
             InitializeComponent();
 
+            graphicsPanel1.BackColor = Properties.Settings.Default.backColor;
+            cellColor = Properties.Settings.Default.cellColor;
+            gridColor = Properties.Settings.Default.gridColor;
+            universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
+
             // Setup the timer
-            timer.Interval = 100; // milliseconds
+            timer.Interval = Properties.Settings.Default.timeInterval; // milliseconds
             toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
@@ -548,6 +554,17 @@ namespace GOL_Monraz
             }
             // Tells windows to repaint
             graphicsPanel1.Invalidate();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.backColor = graphicsPanel1.BackColor;
+            Properties.Settings.Default.cellColor = cellColor;
+            Properties.Settings.Default.gridColor = gridColor;
+            Properties.Settings.Default.timeInterval = timer.Interval;
+            Properties.Settings.Default.universeWidth = universe.GetLength(1);
+            Properties.Settings.Default.universeHeight = universe.GetLength(0);
+            Properties.Settings.Default.Save();
         }
     }
 }
