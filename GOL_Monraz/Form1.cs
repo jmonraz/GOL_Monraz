@@ -120,25 +120,27 @@ namespace GOL_Monraz
 
             graphicsPanel1.Invalidate();
         }
-
+        // Method to get the count of the living cells in the current universe
         private void CountAliveCells()
         {
-
+            // Gets the universe array 2-d length
             int yAxis = universe.GetLength(1);
             int xAxis = universe.GetLength(0);
+            // Assigns the total length to cellsAlive variable
             cellsAlive = yAxis * xAxis;
+            // Iterates through every cell in the current universe
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-
+                    // Deducts 1 from cellsAlive total if the cell is dead
                     if (!universe[x, y])
                     {
                         --cellsAlive;
                     }
                 }
             }
-
+            // Updates the Alive label in the statusStrip
             aliveLabel.Text = "Alive = " + cellsAlive.ToString();
         }
 
@@ -307,27 +309,27 @@ namespace GOL_Monraz
             }
             return count;
         }
-
+        // Click event to set timer to false
         private void PauseStripButton_Click(object sender, EventArgs e)
         {
             this.timer.Enabled = false;
         }
-
+        // Click event to set timer to true
         private void PlayStripButton_Click(object sender, EventArgs e)
         {
             this.timer.Enabled = true;
         }
-
+        // Click event to jump to the next generation
         private void ForwardStripButton_Click(object sender, EventArgs e)
         {
             NextGeneration();
         }
-
+        // Click event to terminate the form
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        // Click event to clear the graphics panel
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Iterates through the universe array to clear the panel
@@ -344,20 +346,26 @@ namespace GOL_Monraz
             generations = 0;
             // Resets the cellsAlive count
             cellsAlive = 0;
-
+            // Updates the Alive label in the statusStrip
             aliveLabel.Text = "Alive = " + cellsAlive.ToString();
+            // Updates the Generations label in the statusStrip
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            // Sets the timer to false/ pauses the next generation
             this.timer.Enabled = false;
+            // Tells windows to repaint
             graphicsPanel1.Invalidate();
         }
-
+        // Click event to adjust the options menu properties
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates an instance of the Options_Dialog
             Options_Dialog dlg = new Options_Dialog();
 
+            // Sets the properties of the Options_Dialog
             dlg.Miliseconds = timer.Interval;
             dlg.CellWidht = universe.GetLength(1);
             dlg.CellHeight = universe.GetLength(0);
+
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
@@ -369,15 +377,16 @@ namespace GOL_Monraz
                     universe = new bool[x, y];
                     scratchPad = new bool[x, y];
                 }
-
+                // Updates the Interval label in the statusStrip
                 toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
                 // Tells windows to repaint
                 graphicsPanel1.Invalidate();
             }
         }
-
+        // Click event to change cell color inside the options menu
         private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates an instance of the ColorDialog
             ColorDialog dlg = new ColorDialog();
 
 
@@ -389,17 +398,20 @@ namespace GOL_Monraz
             }
 
         }
-
+        // Click event to create universe from seed inside the Randomize menu
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates an instance of the SeedDialog
             SeedDialog dlg = new SeedDialog();
 
+            // Sets the properties of the SeedDialog
             dlg.seedNumber = seed;
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 seed = dlg.seedNumber;
 
+                // Creates a Random instance base on seed
                 Random randy = new Random(seed);
 
                 for (int y = 0; y < universe.GetLength(1); y++)
@@ -420,35 +432,44 @@ namespace GOL_Monraz
                     }
                 }
             }
+            // Calls method to count the living cells and updates the Alive label
             CountAliveCells();
         }
-
+        // Click event to create universe from time inside the Randomize menu
         private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates a Random instance from time
             Random randy = new Random();
-
+            // iteretates through the current universe
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
+                    // Assigns a random number 0 or 1 to num
                     int num = randy.Next(0, 2);
+                    // Defines if a cell should be alive
                     if (num == 0)
                     {
                         universe[x, y] = true;
+                        // Tells windows to repaint
                         graphicsPanel1.Invalidate();
                     }
+                    // Sets cell to dead if num is not 0
                     else
                     {
                         universe[x, y] = false;
+                        // Tells windows to repaint
                         graphicsPanel1.Invalidate();
                     }
                 }
             }
+            // Calls method to count the living cells and updates the Alive label
             CountAliveCells();
         }
-
+        // Click event to change the color of the grid in the graphics panel
         private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates an instance of the ColorDialog
             ColorDialog dlg = new ColorDialog();
 
 
@@ -459,9 +480,10 @@ namespace GOL_Monraz
                 graphicsPanel1.Invalidate();
             }
         }
-
+        // Click event to change the color of the universe background
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Creates an instance of the ColorDialog
             ColorDialog dlg = new ColorDialog();
 
             dlg.Color = graphicsPanel1.BackColor;
@@ -471,7 +493,7 @@ namespace GOL_Monraz
                 graphicsPanel1.Invalidate();
             }
         }
-
+        // Click event to turn on/off the display of neighbor count for every cell
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Turns on the neighbor count in the graphic panel for each cell
@@ -486,7 +508,7 @@ namespace GOL_Monraz
             }
             graphicsPanel1.Invalidate();
         }
-
+        // Click event to turn on/off the display of the grid in the graphics panel
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Turns on the grid on the graphics panel
@@ -501,7 +523,7 @@ namespace GOL_Monraz
             }
             graphicsPanel1.Invalidate();
         }
-
+        // Click event to turn/off toroidal neighbor count
         private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Unchecks finite checkbox and sets finite count neighbors to false
@@ -514,7 +536,7 @@ namespace GOL_Monraz
             // Tells windows to repaint
             graphicsPanel1.Invalidate();
         }
-
+        // Click event to turn/off finite neighbor count
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Unchecks toroidal checkbox and sets toroidal count neighbors to false
