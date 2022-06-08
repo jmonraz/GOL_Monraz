@@ -580,5 +580,16 @@ namespace GOL_Monraz
             universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
             scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
         }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reload();
+
+            graphicsPanel1.BackColor = Properties.Settings.Default.backColor;
+            cellColor = Properties.Settings.Default.cellColor;
+            gridColor = Properties.Settings.Default.gridColor;
+            universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
+            scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
+        }
     }
 }
