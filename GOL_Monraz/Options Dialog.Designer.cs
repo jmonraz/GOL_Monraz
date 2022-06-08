@@ -135,7 +135,7 @@ namespace GOL_Monraz
             this.Name = "Options_Dialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options Dialog";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Options_Dialog_FormClosed);
+            
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMiliseconds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidthCells)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeightCells)).EndInit();

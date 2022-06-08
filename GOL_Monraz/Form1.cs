@@ -54,7 +54,7 @@ namespace GOL_Monraz
             cellColor = Properties.Settings.Default.cellColor;
             gridColor = Properties.Settings.Default.gridColor;
             universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
-
+            scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
             // Setup the timer
             timer.Interval = Properties.Settings.Default.timeInterval; // milliseconds
             toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
@@ -564,7 +564,21 @@ namespace GOL_Monraz
             Properties.Settings.Default.timeInterval = timer.Interval;
             Properties.Settings.Default.universeWidth = universe.GetLength(1);
             Properties.Settings.Default.universeHeight = universe.GetLength(0);
+            Properties.Settings.Default.universeWidth = scratchPad.GetLength(1);
+            Properties.Settings.Default.universeHeight = scratchPad.GetLength(0);
+
             Properties.Settings.Default.Save();
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+
+            graphicsPanel1.BackColor = Properties.Settings.Default.backColor;
+            cellColor = Properties.Settings.Default.cellColor;
+            gridColor = Properties.Settings.Default.gridColor;
+            universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
+            scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
         }
     }
 }
