@@ -520,12 +520,28 @@ namespace GOL_Monraz
             // Turns on the grid on the graphics panel
             if(gridToolStripMenuItem.Checked == true)
             {
+                gridToolContextMenu.Checked = true;
                 isGridVisible = true;
             }
             // Turns off the grid on the graphics panel
             else if(gridToolStripMenuItem.Checked == false)
             {
+                gridToolContextMenu.Checked = false;
                 isGridVisible = false;
+            }
+            graphicsPanel1.Invalidate();
+        }
+        private void gridToolContextMenu_Click(object sender, EventArgs e)
+        {
+            if(gridToolContextMenu.Checked == true)
+            {
+                gridToolStripMenuItem.Checked = true;
+                isGridVisible = true;
+            }
+            else if(gridToolContextMenu.Checked == false)
+            {
+                isGridVisible = false;
+                gridToolStripMenuItem.Checked = false;
             }
             graphicsPanel1.Invalidate();
         }
@@ -591,5 +607,7 @@ namespace GOL_Monraz
             universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
             scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
         }
+
+        
     }
 }
