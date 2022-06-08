@@ -39,6 +39,12 @@ namespace GOL_Monraz
 
         // Bool for grid on/off
         bool isGridVisible = true;
+
+        // Bool for toroidal on/off
+        bool isToroidal = true;
+
+        // Bool for finite on/off
+        bool isFinite = false;
         public Form1()
         {
             InitializeComponent();
@@ -53,13 +59,21 @@ namespace GOL_Monraz
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-
+            int count = 0;
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    int count = CountNeighborsFinite(x, y);
-
+                    // Apply Finite count neighbor method 
+                    if(isFinite == true)
+                    {
+                        count = CountNeighborsFinite(x, y);
+                    }
+                    // Apply Toroidal count neighbor method 
+                    else if (isToroidal == true)
+                    {
+                        count = CountNeighborsToroidal(x, y);
+                    }
                     // Apply the rules
                     if (universe[x, y])
                     {
@@ -186,8 +200,17 @@ namespace GOL_Monraz
                         stringFormat.Alignment = StringAlignment.Center;
                         stringFormat.LineAlignment = StringAlignment.Center;
 
-                        // Gets number of neighbors for each cell
-                        int neighbors = CountNeighborsFinite(x, y);
+                        int neighbors = 0;
+                        // Gets number of neighbors for each cell in Finite mode
+                        if(isFinite == true)
+                        {
+                            neighbors = CountNeighborsFinite(x, y);
+                        }
+                        // Gets number of neighbors for each cell in Toroidal mode
+                        else if(isToroidal == true)
+                        {
+                            neighbors = CountNeighborsToroidal(x, y);
+                        }
 
                         // If the neighbor count is zero do not display it
                         if (neighbors != 0)
@@ -222,6 +245,7 @@ namespace GOL_Monraz
 
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];
+                // Calls CountAliveCells to update the alive label in the statusStrip
                 CountAliveCells();
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
@@ -256,6 +280,33 @@ namespace GOL_Monraz
 
             return count;
         }
+        private int CountNeighborsToroidal(int x, int y)
+        {
+            int count = 0;
+            int xLen = universe.GetLength(0);
+            int yLen = universe.GetLength(1);
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+            {
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
+                {
+                    int xCheck = x + xOffset;
+                    int yCheck = y + yOffset;
+                    // if xOffset and yOffset are both equal to 0 then continue
+                    if (xOffset == 0 && yOffset == 0) continue;
+                    // if xCheck is less than 0 then set to xLen - 1
+                    if (xCheck < 0) xCheck = xLen - 1;
+                    // if yCheck is less than 0 then set to yLen - 1
+                    if (yCheck < 0) yCheck = yLen - 1;
+                    // if xCheck is greater than or equal too xLen then set to 0
+                    if (xCheck >= xLen) xCheck = 0;
+                    // if yCheck is greater than or equal too yLen then set to 0
+                    if (yCheck >= yLen) yCheck = 0;
+
+                    if (universe[xCheck, yCheck] == true) count++;
+                }
+            }
+            return count;
+        }
 
         private void PauseStripButton_Click(object sender, EventArgs e)
         {
@@ -279,15 +330,19 @@ namespace GOL_Monraz
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Iterates through the universe array to clear the panel
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
+                    // Sets all cells to dead
                     universe[x, y] = false;
                 }
             }
 
+            // Resets the generations count
             generations = 0;
+            // Resets the cellsAlive count
             cellsAlive = 0;
 
             aliveLabel.Text = "Alive = " + cellsAlive.ToString();
@@ -316,7 +371,7 @@ namespace GOL_Monraz
                 }
 
                 toolStripStatusLabelInterval.Text = "Interval = " + timer.Interval.ToString();
-
+                // Tells windows to repaint
                 graphicsPanel1.Invalidate();
             }
         }
@@ -419,10 +474,12 @@ namespace GOL_Monraz
 
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Turns on the neighbor count in the graphic panel for each cell
             if (neighborCountToolStripMenuItem.Checked == true)
             {
                 isNeighborCountVisible = true;
             }
+            //Turns off the neighbor count in the graphic panel for each cell
             else if (neighborCountToolStripMenuItem.Checked == false)
             {
                 isNeighborCountVisible = false;
@@ -432,14 +489,42 @@ namespace GOL_Monraz
 
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Turns on the grid on the graphics panel
             if(gridToolStripMenuItem.Checked == true)
             {
                 isGridVisible = true;
             }
+            // Turns off the grid on the graphics panel
             else if(gridToolStripMenuItem.Checked == false)
             {
                 isGridVisible = false;
             }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Unchecks finite checkbox and sets finite count neighbors to false
+            if (toroidalToolStripMenuItem.Checked == true)
+            {
+                isToroidal = true;
+                isFinite = false;
+                finiteToolStripMenuItem.Checked = false;
+            }
+            // Tells windows to repaint
+            graphicsPanel1.Invalidate();
+        }
+
+        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Unchecks toroidal checkbox and sets toroidal count neighbors to false
+            if(finiteToolStripMenuItem.Checked == true)
+            {
+                isFinite = true;
+                isToroidal = false;
+                toroidalToolStripMenuItem.Checked = false;
+            }
+            // Tells windows to repaint
             graphicsPanel1.Invalidate();
         }
     }
