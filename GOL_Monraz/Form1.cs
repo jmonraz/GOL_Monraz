@@ -652,10 +652,27 @@ namespace GOL_Monraz
             if(hUDToolStripMenuItem.Checked == true)
             {
                 isHudVisible = true;
+                hUDToolStripMenuItem1.Checked = true;
             }
             else if(hUDToolStripMenuItem.Checked == false)
             {
                 isHudVisible = false;
+                hUDToolStripMenuItem1.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
+        }
+        // Turns on/off HUD in the view menu
+        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(hUDToolStripMenuItem1.Checked == true)
+            {
+                isHudVisible = true;
+                hUDToolStripMenuItem.Checked = true;
+            }
+            else if(hUDToolStripMenuItem1.Checked == false)
+            {
+                isHudVisible = false;
+                hUDToolStripMenuItem.Checked = false;
             }
             graphicsPanel1.Invalidate();
         }
