@@ -46,6 +46,9 @@ namespace GOL_Monraz
 
         // Bool for finite on/off
         bool isFinite = false;
+
+        // Bool for displaying HUD
+        bool isHudVisible = true;
         public Form1()
         {
             InitializeComponent();
@@ -198,7 +201,7 @@ namespace GOL_Monraz
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                     }
                     
-
+                    // Draws number of neighbors for each cell
                     if(isNeighborCountVisible == true)
                     {
                         // Sets font and size of neighbor count
@@ -230,6 +233,26 @@ namespace GOL_Monraz
                 }
             }
 
+            if(isHudVisible == true)
+            {
+                string boundaryType = String.Empty;
+                if(isToroidal == true)
+                {
+                    boundaryType = "Toroidal";
+                }
+                else if(isFinite == true)
+                {
+                    boundaryType = "Finite";
+                }
+                Font font = new Font("Arial", 10f);
+                StringFormat stringFormat = new StringFormat();
+                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Far;
+                string HUD = "Generation = " + generations + '\n' + "Alive Cells = " + cellsAlive + "\n" + "Boundary Type = " + boundaryType + "\n"
+                    + "Universe Width = " + universe.GetLength(0) + "\n" + "Universe Height = " + universe.GetLength(1); 
+                e.Graphics.DrawString(HUD.ToString(), font, Brushes.Red, graphicsPanel1.ClientRectangle, stringFormat);
+                
+            }
             
             // Cleaning up pens and brushes
             gridPen.Dispose();
@@ -369,8 +392,8 @@ namespace GOL_Monraz
 
             // Sets the properties of the Options_Dialog
             dlg.Miliseconds = timer.Interval;
-            dlg.CellWidht = universe.GetLength(1);
-            dlg.CellHeight = universe.GetLength(0);
+            dlg.CellWidht = universe.GetLength(0);
+            dlg.CellHeight = universe.GetLength(1);
 
 
             if (DialogResult.OK == dlg.ShowDialog())
@@ -594,10 +617,10 @@ namespace GOL_Monraz
             Properties.Settings.Default.cellColor = cellColor;
             Properties.Settings.Default.gridColor = gridColor;
             Properties.Settings.Default.timeInterval = timer.Interval;
-            Properties.Settings.Default.universeWidth = universe.GetLength(1);
-            Properties.Settings.Default.universeHeight = universe.GetLength(0);
-            Properties.Settings.Default.universeWidth = scratchPad.GetLength(1);
-            Properties.Settings.Default.universeHeight = scratchPad.GetLength(0);
+            Properties.Settings.Default.universeWidth = universe.GetLength(0);
+            Properties.Settings.Default.universeHeight = universe.GetLength(1);
+            Properties.Settings.Default.universeWidth = scratchPad.GetLength(0);
+            Properties.Settings.Default.universeHeight = scratchPad.GetLength(1);
 
             Properties.Settings.Default.Save();
         }
@@ -623,7 +646,18 @@ namespace GOL_Monraz
             universe = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
             scratchPad = new bool[Properties.Settings.Default.universeWidth, Properties.Settings.Default.universeHeight];
         }
-
-        
+        // Turns on/off HUD in the context menu
+        private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(hUDToolStripMenuItem.Checked == true)
+            {
+                isHudVisible = true;
+            }
+            else if(hUDToolStripMenuItem.Checked == false)
+            {
+                isHudVisible = false;
+            }
+            graphicsPanel1.Invalidate();
+        }
     }
 }

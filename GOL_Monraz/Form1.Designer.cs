@@ -63,6 +63,8 @@ namespace GOL_Monraz
             this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -76,8 +78,6 @@ namespace GOL_Monraz
             this.toolStripStatusLabelInterval = new System.Windows.Forms.ToolStripStatusLabel();
             this.aliveLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.graphicsPanel1 = new GOL_Monraz.GraphicsPanel();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +87,7 @@ namespace GOL_Monraz
             this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.neighborCountToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hUDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -215,7 +216,7 @@ namespace GOL_Monraz
             this.neighborCountToolStripMenuItem.CheckOnClick = true;
             this.neighborCountToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.neighborCountToolStripMenuItem.Name = "neighborCountToolStripMenuItem";
-            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.neighborCountToolStripMenuItem.Text = "Neighbor Count";
             this.neighborCountToolStripMenuItem.Click += new System.EventHandler(this.neighborCountToolStripMenuItem_Click);
             // 
@@ -225,14 +226,14 @@ namespace GOL_Monraz
             this.gridToolStripMenuItem.CheckOnClick = true;
             this.gridToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(157, 6);
             // 
             // toroidalToolStripMenuItem
             // 
@@ -240,7 +241,7 @@ namespace GOL_Monraz
             this.toroidalToolStripMenuItem.CheckOnClick = true;
             this.toroidalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toroidalToolStripMenuItem.Name = "toroidalToolStripMenuItem";
-            this.toroidalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.toroidalToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.toroidalToolStripMenuItem.Text = "Toroidal";
             this.toroidalToolStripMenuItem.Click += new System.EventHandler(this.toroidalToolStripMenuItem_Click);
             // 
@@ -248,7 +249,7 @@ namespace GOL_Monraz
             // 
             this.finiteToolStripMenuItem.CheckOnClick = true;
             this.finiteToolStripMenuItem.Name = "finiteToolStripMenuItem";
-            this.finiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.finiteToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.finiteToolStripMenuItem.Text = "Finite";
             this.finiteToolStripMenuItem.Click += new System.EventHandler(this.finiteToolStripMenuItem_Click);
             // 
@@ -362,6 +363,20 @@ namespace GOL_Monraz
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.resetToolStripMenuItem.Text = "&Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reloadToolStripMenuItem.Text = "Reload";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -484,28 +499,15 @@ namespace GOL_Monraz
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
             // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.resetToolStripMenuItem.Text = "&Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
-            // 
-            // reloadToolStripMenuItem
-            // 
-            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reloadToolStripMenuItem.Text = "Reload";
-            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorToolStripMenuItem,
             this.toolStripSeparator5,
-            this.viewToolStripMenuItem1});
+            this.viewToolStripMenuItem1,
+            this.hUDToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 98);
             // 
             // colorToolStripMenuItem
             // 
@@ -520,21 +522,21 @@ namespace GOL_Monraz
             // backColorToolStripMenuItem1
             // 
             this.backColorToolStripMenuItem1.Name = "backColorToolStripMenuItem1";
-            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.backColorToolStripMenuItem1.Text = "Back Color";
             this.backColorToolStripMenuItem1.Click += new System.EventHandler(this.backColorToolStripMenuItem_Click);
             // 
             // cellColorToolStripMenuItem1
             // 
             this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
-            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.cellColorToolStripMenuItem1.Text = "Cell Color";
             this.cellColorToolStripMenuItem1.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click);
             // 
             // gridColorToolStripMenuItem1
             // 
             this.gridColorToolStripMenuItem1.Name = "gridColorToolStripMenuItem1";
-            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.gridColorToolStripMenuItem1.Text = "Grid Color";
             this.gridColorToolStripMenuItem1.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
             // 
@@ -558,7 +560,7 @@ namespace GOL_Monraz
             this.gridToolContextMenu.CheckOnClick = true;
             this.gridToolContextMenu.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gridToolContextMenu.Name = "gridToolContextMenu";
-            this.gridToolContextMenu.Size = new System.Drawing.Size(180, 22);
+            this.gridToolContextMenu.Size = new System.Drawing.Size(160, 22);
             this.gridToolContextMenu.Text = "Grid";
             this.gridToolContextMenu.Click += new System.EventHandler(this.gridToolContextMenu_Click);
             // 
@@ -568,9 +570,19 @@ namespace GOL_Monraz
             this.neighborCountToolStripMenuItem1.CheckOnClick = true;
             this.neighborCountToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.neighborCountToolStripMenuItem1.Name = "neighborCountToolStripMenuItem1";
-            this.neighborCountToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.neighborCountToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.neighborCountToolStripMenuItem1.Text = "Neighbor Count";
             this.neighborCountToolStripMenuItem1.Click += new System.EventHandler(this.neighborCountToolStripMenuItem1_Click);
+            // 
+            // hUDToolStripMenuItem
+            // 
+            this.hUDToolStripMenuItem.Checked = true;
+            this.hUDToolStripMenuItem.CheckOnClick = true;
+            this.hUDToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hUDToolStripMenuItem.Name = "hUDToolStripMenuItem";
+            this.hUDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hUDToolStripMenuItem.Text = "HUD";
+            this.hUDToolStripMenuItem.Click += new System.EventHandler(this.hUDToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -657,6 +669,7 @@ namespace GOL_Monraz
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem gridToolContextMenu;
         private System.Windows.Forms.ToolStripMenuItem neighborCountToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hUDToolStripMenuItem;
     }
 }
 
