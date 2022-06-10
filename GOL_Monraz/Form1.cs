@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace GOL_Monraz
 {
     public partial class Form1 : Form
     {
-        
+
         // The universe array
         bool[,] universe = new bool[,] { };
 
@@ -74,7 +75,7 @@ namespace GOL_Monraz
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     // Apply Finite count neighbor method 
-                    if(isFinite == true)
+                    if (isFinite == true)
                     {
                         count = CountNeighborsFinite(x, y);
                     }
@@ -167,7 +168,7 @@ namespace GOL_Monraz
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
             int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
-            
+
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
 
@@ -200,9 +201,9 @@ namespace GOL_Monraz
                         // Outline the cell with a pen
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                     }
-                    
+
                     // Draws number of neighbors for each cell
-                    if(isNeighborCountVisible == true)
+                    if (isNeighborCountVisible == true)
                     {
                         // Sets font and size of neighbor count
                         Font font = new Font("Arial", 6f);
@@ -213,12 +214,12 @@ namespace GOL_Monraz
 
                         int neighbors = 0;
                         // Gets number of neighbors for each cell in Finite mode
-                        if(isFinite == true)
+                        if (isFinite == true)
                         {
                             neighbors = CountNeighborsFinite(x, y);
                         }
                         // Gets number of neighbors for each cell in Toroidal mode
-                        else if(isToroidal == true)
+                        else if (isToroidal == true)
                         {
                             neighbors = CountNeighborsToroidal(x, y);
                         }
@@ -229,18 +230,18 @@ namespace GOL_Monraz
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
                         }
                     }
-                    
+
                 }
             }
 
-            if(isHudVisible == true)
+            if (isHudVisible == true)
             {
                 string boundaryType = String.Empty;
-                if(isToroidal == true)
+                if (isToroidal == true)
                 {
                     boundaryType = "Toroidal";
                 }
-                else if(isFinite == true)
+                else if (isFinite == true)
                 {
                     boundaryType = "Finite";
                 }
@@ -249,11 +250,11 @@ namespace GOL_Monraz
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Far;
                 string HUD = "Generation = " + generations + '\n' + "Alive Cells = " + cellsAlive + "\n" + "Boundary Type = " + boundaryType + "\n"
-                    + "Universe Width = " + universe.GetLength(0) + "\n" + "Universe Height = " + universe.GetLength(1); 
+                    + "Universe Width = " + universe.GetLength(0) + "\n" + "Universe Height = " + universe.GetLength(1);
                 e.Graphics.DrawString(HUD.ToString(), font, Brushes.Red, graphicsPanel1.ClientRectangle, stringFormat);
-                
+
             }
-            
+
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -541,12 +542,12 @@ namespace GOL_Monraz
         }
         private void neighborCountToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if(neighborCountToolStripMenuItem1.Checked == true)
+            if (neighborCountToolStripMenuItem1.Checked == true)
             {
                 isNeighborCountVisible = true;
                 neighborCountToolStripMenuItem.Checked = true;
             }
-            else if(neighborCountToolStripMenuItem1.Checked == false)
+            else if (neighborCountToolStripMenuItem1.Checked == false)
             {
                 isNeighborCountVisible = false;
                 neighborCountToolStripMenuItem.Checked = false;
@@ -557,13 +558,13 @@ namespace GOL_Monraz
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Turns on the grid on the graphics panel
-            if(gridToolStripMenuItem.Checked == true)
+            if (gridToolStripMenuItem.Checked == true)
             {
                 gridToolContextMenu.Checked = true;
                 isGridVisible = true;
             }
             // Turns off the grid on the graphics panel
-            else if(gridToolStripMenuItem.Checked == false)
+            else if (gridToolStripMenuItem.Checked == false)
             {
                 gridToolContextMenu.Checked = false;
                 isGridVisible = false;
@@ -572,12 +573,12 @@ namespace GOL_Monraz
         }
         private void gridToolContextMenu_Click(object sender, EventArgs e)
         {
-            if(gridToolContextMenu.Checked == true)
+            if (gridToolContextMenu.Checked == true)
             {
                 gridToolStripMenuItem.Checked = true;
                 isGridVisible = true;
             }
-            else if(gridToolContextMenu.Checked == false)
+            else if (gridToolContextMenu.Checked == false)
             {
                 isGridVisible = false;
                 gridToolStripMenuItem.Checked = false;
@@ -601,7 +602,7 @@ namespace GOL_Monraz
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Unchecks toroidal checkbox and sets toroidal count neighbors to false
-            if(finiteToolStripMenuItem.Checked == true)
+            if (finiteToolStripMenuItem.Checked == true)
             {
                 isFinite = true;
                 isToroidal = false;
@@ -649,12 +650,12 @@ namespace GOL_Monraz
         // Turns on/off HUD in the context menu
         private void hUDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(hUDToolStripMenuItem.Checked == true)
+            if (hUDToolStripMenuItem.Checked == true)
             {
                 isHudVisible = true;
                 hUDToolStripMenuItem1.Checked = true;
             }
-            else if(hUDToolStripMenuItem.Checked == false)
+            else if (hUDToolStripMenuItem.Checked == false)
             {
                 isHudVisible = false;
                 hUDToolStripMenuItem1.Checked = false;
@@ -664,17 +665,67 @@ namespace GOL_Monraz
         // Turns on/off HUD in the view menu
         private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if(hUDToolStripMenuItem1.Checked == true)
+            if (hUDToolStripMenuItem1.Checked == true)
             {
                 isHudVisible = true;
                 hUDToolStripMenuItem.Checked = true;
             }
-            else if(hUDToolStripMenuItem1.Checked == false)
+            else if (hUDToolStripMenuItem1.Checked == false)
             {
                 isHudVisible = false;
                 hUDToolStripMenuItem.Checked = false;
             }
             graphicsPanel1.Invalidate();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
+
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+
+                // Write any comments you want to include first.
+                // Prefix all comment strings with an exclamation point.
+                // Use WriteLine to write the strings to the file. 
+                // It appends a CRLF for you.
+                writer.WriteLine("!This is my comment.");
+
+                // Iterate through the universe one row at a time.
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    // Create a string to represent the current row.
+                    String currentRow = string.Empty;
+
+                    // Iterate through the current row one cell at a time.
+                    for (int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        // If the universe[x,y] is alive then append 'O' (capital O)
+                        // to the row string.
+                        if (universe[x, y])
+                        {
+                            currentRow += 'O';
+                            writer.Write(currentRow);
+                        }
+                        // Else if the universe[x,y] is dead then append '.' (period)
+                        // to the row string.
+                        else
+                        {
+                            currentRow += '.';
+                            writer.Write(currentRow);     
+                        }
+                    }
+                    // Once the current row has been read through and the 
+                    // string constructed then write it to the file using WriteLine.
+                    writer.WriteLine();
+                }
+                // After all rows and columns have been written then close the file.
+                writer.Close();
+            }
         }
     }
 }
