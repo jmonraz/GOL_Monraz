@@ -677,7 +677,7 @@ namespace GOL_Monraz
             }
             graphicsPanel1.Invalidate();
         }
-
+        // Click event to save a file
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -727,7 +727,7 @@ namespace GOL_Monraz
                 writer.Close();
             }
         }
-
+        // Click event to open a file
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
